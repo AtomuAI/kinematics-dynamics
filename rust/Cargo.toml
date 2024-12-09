@@ -10,4 +10,6 @@ path = "src/lib.rs"
 
 [dependencies]
 thiserror = "2.0.4"
+num = "0.4.3"
 linear-algebra = { path = "../../linear-algebra/rust" }
+graphs = { path = "../../graphs/rust" }
