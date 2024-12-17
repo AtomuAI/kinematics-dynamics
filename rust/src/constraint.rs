@@ -48,7 +48,7 @@ where
     T: 'static + Default + Copy + Debug + PartialOrd
 {
     pub fn new( options: [ Option<Range<T>>; DIM ] ) -> Self {
-        Self( Vector::take( options ) )
+        Self( Vector::from( options ) )
     }
 
     pub fn constrain( &self, vec: &mut Vector<T, DIM>)

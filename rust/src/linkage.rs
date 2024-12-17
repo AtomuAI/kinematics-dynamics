@@ -24,7 +24,7 @@ pub enum Error {
 }
 
 #[derive( Default, Debug )]
-pub struct Linkage<I, T, const DIM: usize, const ORD: usize>( UnGraph<I, Joint<T, DIM, ORD>, Link<T>> )
+pub struct Linkage<I, T, const DIM: usize, const ORD: usize>( UnGraph<I, Joint<T, DIM, ORD>, Link<T, DIM>> )
 where
     I: 'static + Default + Debug,
     T: 'static + Default + Copy + Debug,
@@ -41,14 +41,14 @@ where
     [(); (ORD + 1) * 2]:
 {
     pub fn new() -> Self {
-        Self( UnGraph::<I, Joint<T, DIM, ORD>, Link<T>>::new() )
+        Self( UnGraph::<I, Joint<T, DIM, ORD>, Link<T, DIM>>::new() )
     }
 
     pub fn add_joint( &mut self, id: I, joint: Joint<T, DIM, ORD> ) -> Result<(), Error> {
         self.0.add_node( id, joint ).map_err( |_| Error::FailedToAddJoint )
     }
 
-    pub fn add_link( &mut self, nodeid1: I, nodeid2: I, link: Link<T> ) -> Result<(), Error> {
+    pub fn add_link( &mut self, nodeid1: I, nodeid2: I, link: Link<T, DIM> ) -> Result<(), Error> {
         self.0.add_edge( nodeid1, nodeid2, link ).map_err( |_| Error::FailedToAddLink )
     }
 
@@ -60,11 +60,11 @@ where
         self.0.get_node_mut( id )
     }
 
-    pub fn get_link( &self, nodeid1: I, nodeid2: I ) -> Option<&Link<T>> {
+    pub fn get_link( &self, nodeid1: I, nodeid2: I ) -> Option<&Link<T, DIM>> {
         self.0.get_edge( nodeid1, nodeid2 )
     }
 
-    pub fn get_link_mut( &mut self, nodeid1: I, nodeid2: I ) -> Option<&mut Link<T>> {
+    pub fn get_link_mut( &mut self, nodeid1: I, nodeid2: I ) -> Option<&mut Link<T, DIM>> {
         self.0.get_edge_mut( nodeid1, nodeid2 )
     }
 
@@ -72,7 +72,7 @@ where
         self.0.remove_node( id ).map( |data| data.data().to_owned() ).map_err( |_| Error::FailedToRemoveJoint )
     }
 
-    pub fn remove_link( &mut self, nodeid1: I, nodeid2: I ) -> Result<Link<T>, Error> {
+    pub fn remove_link( &mut self, nodeid1: I, nodeid2: I ) -> Result<Link<T, DIM>, Error> {
         self.0.remove_edge( nodeid1, nodeid2 ).map_err( |_| Error::FailedToRemoveLink )
     }
 
@@ -250,23 +250,23 @@ mod tests {
 
     #[test]
     fn new_test() {
-        let mut linkage = Linkage3D::<usize, f32, 6>::new();
+        let mut linkage = Linkage3D::<usize, f32, 1>::new();
         linkage.add_joint( 0,
             Joint3D::new(
-                Body3D::new( 1.0, [ Vector3::default(); 7 ], [ Vector3::default(); 7 ] ),
-                [ Constraint3D::new( [ None, None, None ] ); 14 ]
+                Body3D::new( 1.0, [ Vector3::default(); 2 ], [ Vector3::default(); 2 ] ),
+                [ Constraint3D::default(); 4 ]
             )
         ).unwrap();
         linkage.add_joint( 1,
             Joint3D::new(
-                Body3D::new( 1.0, [ Vector3::default(); 7 ], [ Vector3::default(); 7 ] ),
-                [ Constraint3D::new( [ None, None, None ] ); 14 ]
+                Body3D::new( 1.0, [ Vector3::default(); 2 ], [ Vector3::default(); 2 ] ),
+                [ Constraint3D::default(); 4 ]
             )
         ).unwrap();
         linkage.add_joint( 2,
             Joint3D::new(
-                Body3D::new( 1.0, [ Vector3::default(); 7 ], [ Vector3::default(); 7 ] ),
-                [ Constraint3D::new( [ None, None, None ] ); 14 ]
+                Body3D::new( 1.0, [ Vector3::default(); 2 ], [ Vector3::default(); 2 ] ),
+                [ Constraint3D::default(); 4 ]
             )
         ).unwrap();
         linkage.add_link( 0, 1, Link::default() ).unwrap();

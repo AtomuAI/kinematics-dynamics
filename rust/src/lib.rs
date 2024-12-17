@@ -4,9 +4,8 @@
 #![feature(adt_const_params)]
 #![feature(generic_const_exprs)]
 
+pub mod particle;
 pub mod body;
-pub mod quat;
-pub mod rot;
 pub mod joint;
 pub mod link;
 pub mod constraint;

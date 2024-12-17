@@ -136,7 +136,7 @@ where
     T: PartialOrd,
     {
         for i in 0..=ORD {
-            self.constraints[ i ].constrain( &mut self.body.position[ i ] );
+            self.constraints[ i ].constrain( &mut self.body.spatial[ i ] );
         }
     }
 

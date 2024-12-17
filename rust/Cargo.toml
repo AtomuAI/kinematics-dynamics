@@ -9,7 +9,7 @@ edition = "2021"
 path = "src/lib.rs"
 
 [dependencies]
-thiserror = "2.0.4"
+thiserror = "2.0.6"
 num = "0.4.3"
 linear-algebra = { path = "../../linear-algebra/rust" }
 graphs = { path = "../../graphs/rust" }
