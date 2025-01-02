@@ -6,11 +6,9 @@ use std::{
 };
 
 use linear_algebra::vector::Vector;
+use const_expr_bounds::{ Assert, IsTrue };
 
-use crate::{
-    Assert, IsTrue,
-    particle::Particle,
-};
+use crate::{ particle::Particle };
 
 #[derive( Clone, Debug, PartialEq )]
 pub struct Body<T, const DIM: usize, const ORD: usize>

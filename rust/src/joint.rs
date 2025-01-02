@@ -6,9 +6,9 @@ use std::{
 };
 
 use linear_algebra::vector::Vector;
+use const_expr_bounds::{ Assert, IsTrue };
 
 use crate::{
-    Assert, IsTrue,
     body::Body,
     constraint::Constraint
 };

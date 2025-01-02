@@ -7,7 +7,7 @@ use std::{
 
 use linear_algebra::vector::Vector;
 
-use crate::{ Assert, IsTrue };
+use const_expr_bounds::{ Assert, IsTrue };
 
 #[derive( Clone, Debug, PartialEq )]
 pub struct Particle<T, const DIM: usize, const ORD: usize>

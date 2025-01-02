@@ -10,9 +10,3 @@ pub mod joint;
 pub mod link;
 pub mod constraint;
 pub mod linkage;
-
-pub struct Assert<const CHECK: bool>;
-pub trait IsTrue {}
-impl IsTrue for Assert<true> {}
-pub trait IsFalse {}
-impl IsFalse for Assert<false> {}

@@ -7,9 +7,9 @@ use graphs::{
     graph::GraphTraits,
     undirected_graph::UnGraph
 };
+use const_expr_bounds::{ Assert, IsTrue };
 
 use crate::{
-    Assert, IsTrue,
     joint::Joint,
     link::Link,
     constraint::Constraint
